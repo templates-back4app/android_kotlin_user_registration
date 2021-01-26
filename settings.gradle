@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "android.user_registration_kt"
