@@ -3,6 +3,7 @@ package com.example.android_user_registration_kt
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
@@ -37,8 +38,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
         signup?.setOnClickListener {
-            if (password?.text.toString() == passwordagain?.text.toString() && username?.text?.length != 0
-            )
+            if (password?.text.toString() == passwordagain?.text.toString() && TextUtils.isEmpty(username?.text))
                 signup(username?.text.toString(), password?.text.toString());
             else
                 Toast.makeText(
