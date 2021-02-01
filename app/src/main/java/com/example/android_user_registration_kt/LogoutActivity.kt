@@ -1,25 +1,33 @@
 package com.example.android_user_registration_kt
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.parse.ParseException
 import com.parse.ParseUser
 
 class LogoutActivity : AppCompatActivity() {
     var logout: Button? = null
+    private var progressDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_logout)
         logout = findViewById(R.id.logout)
-
+        progressDialog = ProgressDialog(this)
 
         logout?.setOnClickListener {
+            progressDialog!!.show()
+
             // logging out of Parse
-            ParseUser.logOut()
-            showAlert("So, you're going...", "Ok...Bye-bye then")
+            ParseUser.logOutInBackground { e: ParseException? ->
+                progressDialog!!.dismiss()
+                if (e == null)
+                    showAlert("So, you're going...", "Ok...Bye-bye then")
+            }
         }
     }
 

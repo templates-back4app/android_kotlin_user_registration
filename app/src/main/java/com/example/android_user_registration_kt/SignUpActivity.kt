@@ -38,7 +38,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
         signup?.setOnClickListener {
-            if (password?.text.toString() == passwordagain?.text.toString() && TextUtils.isEmpty(username?.text))
+            if (password?.text.toString() == passwordagain?.text.toString() && !TextUtils.isEmpty(username?.text.toString()))
                 signup(username?.text.toString(), password?.text.toString());
             else
                 Toast.makeText(

@@ -48,26 +48,25 @@ class LoginActivity : AppCompatActivity() {
                 )
             )
         })
-
     }
 
     fun login(username: String, password: String) {
         progressDialog?.show();
         ParseUser.logInInBackground(
             username,
-            password,
-            LogInCallback() { parseUser: ParseUser?, parseException: ParseException? ->
-                progressDialog?.dismiss()
-                if (parseUser != null) {
-                    showAlert("Sucessful Login", "Welcome back " + username + " !");
-                } else {
-                    ParseUser.logOut();
-                    if (parseException != null) {
-                        Toast.makeText(this, parseException.message, Toast.LENGTH_LONG).show()
-                    };
-                }
+            password
+        ) { parseUser: ParseUser?, parseException: ParseException? ->
+            progressDialog?.dismiss()
+            if (parseUser != null) {
+                showAlert("Successful Login", "Welcome back " + username + " !");
+            } else {
+                ParseUser.logOut();
+                if (parseException != null) {
+                    Toast.makeText(this, parseException.message, Toast.LENGTH_LONG).show()
+                };
+            }
 
-            });
+        };
     }
 
 
