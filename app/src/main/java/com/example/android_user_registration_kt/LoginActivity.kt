@@ -51,22 +51,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun login(username: String, password: String) {
-        progressDialog?.show();
-        ParseUser.logInInBackground(
-            username,
-            password
-        ) { parseUser: ParseUser?, parseException: ParseException? ->
+        progressDialog?.show()
+        ParseUser.logInInBackground(username,password) { parseUser: ParseUser?, parseException: ParseException? ->
             progressDialog?.dismiss()
             if (parseUser != null) {
-                showAlert("Successful Login", "Welcome back " + username + " !");
+                showAlert("Successful Login", "Welcome back " + username + " !")
             } else {
-                ParseUser.logOut();
+                ParseUser.logOut()
                 if (parseException != null) {
                     Toast.makeText(this, parseException.message, Toast.LENGTH_LONG).show()
-                };
+                }
             }
-
-        };
+        }
     }
 
 
